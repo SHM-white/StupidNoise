@@ -2,12 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:StupidNoise"
-             xmlns:h="clr-namespace:H.NotifyIcon;assembly=H.NotifyIcon.Wpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <!-- Simple vector icon for the tray -->
-            <DrawingImage x:Key="TrayIconImage">
+            <!-- Vector used to render a small tray icon at runtime -->
+            <DrawingImage x:Key="TrayIconVector">
                 <DrawingImage.Drawing>
                     <GeometryDrawing Brush="#FF0078D4">
                         <GeometryDrawing.Geometry>
@@ -19,18 +18,6 @@
                     </GeometryDrawing>
                 </DrawingImage.Drawing>
             </DrawingImage>
-
-            <!-- Tray icon with context menu -->
-            <h:TaskbarIcon x:Key="AppTrayIcon"
-                           IconSource="{StaticResource TrayIconImage}"
-                           ToolTipText="StupidNoise">
-                <h:TaskbarIcon.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="开关" Click="TrayToggle_Click"/>
-                        <MenuItem Header="退出" Click="TrayExit_Click"/>
-                    </ContextMenu>
-                </h:TaskbarIcon.ContextMenu>
-            </h:TaskbarIcon>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
