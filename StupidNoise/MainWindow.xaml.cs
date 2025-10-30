@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.ComponentModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -29,6 +30,15 @@ namespace StupidNoise
             // this.Hide();
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            // Prevent the window from closing
+            e.Cancel = true;
+            // Hide the window instead
+            Hide();
+            base.OnClosing(e);
+        }
+
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog
@@ -38,7 +48,10 @@ namespace StupidNoise
             };
             if (dlg.ShowDialog() == true)
             {
-                AudioPathTextBox.Text = dlg.FileName;
+                if (DataContext is AppViewModel vm)
+                {
+                    vm.AudioPath = dlg.FileName;
+                }
             }
         }
     }

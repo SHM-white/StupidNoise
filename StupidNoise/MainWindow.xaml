@@ -5,21 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StupidNoise"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="StupidNoise" Height="125" Width="400" ResizeMode="CanMinimize"
+        Icon="pack://application:,,,/App.ico"
+        DataContext="{StaticResource AppViewModel}">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.8*"/>
-            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="AudioPathTextBox" Grid.Row="0" Grid.Column="0" Margin="5"/>
-        <Button x:Name="BrowseButton" Grid.Row="0" Grid.Column="1" Content="Browse" Click="BrowseButton_Click" Margin="5"/>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            <CheckBox x:Name="IsOnCheckBox" Content="Is On" VerticalAlignment="Top" Margin="5" />
+
+        <TextBox Grid.Row="0" Grid.Column="0" Margin="5" Text="{Binding AudioPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="Browse" Click="BrowseButton_Click" Margin="5"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Min Time (s):" VerticalAlignment="Center" Margin="5"/>
+            <local:SpinBox Value="{Binding MinTime, Mode=TwoWay}" Width="100" Margin="5"/>
+            <TextBlock Text="Max Time (s):" VerticalAlignment="Center" Margin="5"/>
+            <local:SpinBox Value="{Binding MaxTime, Mode=TwoWay}" Width="100" Margin="5"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <CheckBox Content="Is On" VerticalAlignment="Top" Margin="5" IsChecked="{Binding IsOn, Mode=TwoWay}"/>
         </StackPanel>
     </Grid>
 </Window>
